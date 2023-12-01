@@ -1,60 +1,94 @@
-/* Calculator.css */
 .calculator {
-    background-color: #f2f2f2;
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  }
-  
-  .display {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 20px;
-    text-align: right;
-    border-radius: 5px;
-    font-size: 2em;
-    min-height: 60px;
-  }
-  
-  .buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-  }
-  
-  .button {
-    padding: 20px;
-    border-radius: 5px;
-    border: none;
-    background-color: #e0e0e0;
-    font-size: 1.2em;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .button:hover {
-    background-color: #d4d4d4;
-  }
-  
-  /* Specific styling for different types of buttons */
-  .button.operator {
-    background-color: #fe923f;
-    color: white;
-  }
-  
-  .button.operator:hover {
-    background-color: #e8812a;
-  }
-  
-  .button.ac, .button.c {
-    background-color: #ff6262;
-    color: white;
-  }
-  
-  .button.ac:hover, .button.c:hover {
-    background-color: #e55050;
-  }
-  
+  background-color: #f2f2f2;
+  max-width: 500px; /* Adjusted for 5 columns */
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.display {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 20px;
+  text-align: right;
+  border-radius: 5px;
+  font-size: 2em;
+  min-height: 60px;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* Five columns */
+  grid-template-rows: repeat(5, 1fr); /* Five rows to include extra keys */
+  gap: 10px;
+}
+
+.button {
+  padding: 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #e0e0e0;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #d4d4d4;
+}
+
+/* Specific styling for different types of buttons */
+.button.operator {
+  background-color: #fe923f;
+  color: white;
+}
+
+.button.operator:hover {
+  background-color: #e8812a;
+}
+
+.button.ac, .button.c {
+  background-color: #ff6262;
+  color: white;
+}
+
+.button.ac:hover, .button.c:hover {
+  background-color: #e55050;
+}
+
+/* Adjust the grid positions of the buttons to match the calculator image */
+.button.ac { grid-area: 1 / 1; }
+.button.c { grid-area: 1 / 2; }
+.button.percent { grid-area: 1 / 3; }
+.button.divide { grid-area: 1 / 5; }
+.button.multiply { grid-area: 1 / 4; }
+
+.button.seven { grid-area: 2 / 1; }
+.button.eight { grid-area: 2 / 2; }
+.button.nine { grid-area: 2 / 3; }
+.button.minus { grid-area: 2 / 5; }
+.button.mc { grid-area: 2 / 4; }
+
+.button.four { grid-area: 3 / 1; }
+.button.five { grid-area: 3 / 2; }
+.button.six { grid-area: 3 / 3; }
+.button.plus { grid-area: 3 / 4 / 5 / 5; } /* Plus button spans two rows next to 9 and 6 */
+.button.mr { grid-area: 3 / 5; }
+
+.button.one { grid-area: 4 / 1; }
+.button.two { grid-area: 4 / 2; }
+.button.three { grid-area: 4 / 3; }
+.button.equals { grid-area: 4 / 4 / 5 / 5; } /* Equals button spans two rows */
+.button.ms { grid-area: 4 / 5; }
+
+.button.zero { grid-column: 1 / 3; } /* Zero spans two columns */
+.button.dot { grid-area: 5 / 2; }
+.button.plus-minus { grid-area: 5 / 3; }
+
+/* Positioning the extra buttons */
+.button.m-minus { grid-area: 5 / 1; }
+.button.m-plus { grid-area: 5 / 5; }
+
+/* You can add specific classes to the other buttons if needed */

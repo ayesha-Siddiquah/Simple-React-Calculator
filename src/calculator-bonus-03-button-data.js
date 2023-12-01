@@ -117,7 +117,7 @@ export const calculatorButtons = [
     type: "percent",
     className: "percent",
     text: "%",
-    value: "Percent",
+    value: "%",
   },
   {
     type: "sqrt",

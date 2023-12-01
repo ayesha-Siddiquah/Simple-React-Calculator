@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
 import './Calculator.css';
-import { evaluate } from 'mathjs';
+import {evaluate} from 'mathjs';
 import { calculatorButtons } from './calculator-bonus-03-button-data';
 
 const Calculator = () => {
   const [display, setDisplay] = useState('');
   const [memory, setMemory] = useState(0);
+  const [memorize, setMemorize] = useState(0);
 
   const handleButtonClick = (button) => {
     const { type, value } = button;
 
     switch (type) {
       case 'clear':
-        if (value === 'Clear') {
-          setDisplay('');
-        } else if (value === 'All Clear') {
-          setDisplay('');
+        setDisplay('');
+        if (value === 'All Clear') {
           setMemory(0);
         }
         break;
@@ -27,9 +26,10 @@ const Calculator = () => {
           case 'Memory Clear':
             setMemory(0);
             break;
-          case 'Memory Recall':
-            setDisplay(memory.toString());
-            break;
+            case 'Memory Recall':
+              // Assuming you want to append the memory value to the existing display
+              setDisplay((prevDisplay) => prevDisplay + memory.toString());
+              break;
           case 'Memory Subtract':
             setMemory(memory - (parseFloat(display) || 0));
             break;
@@ -48,8 +48,9 @@ const Calculator = () => {
         setDisplay((prevDisplay) => (-1 * (parseFloat(prevDisplay) || 0)).toString());
         break;
       case 'percent':
-        setDisplay((prevDisplay) => (parseFloat(prevDisplay) || 0) / 100);
+        setDisplay(display + '%');
         break;
+        
       case 'sqrt':
         setDisplay(Math.sqrt(parseFloat(display) || 0).toString());
         break;
@@ -63,8 +64,17 @@ const Calculator = () => {
 
   const calculateResult = () => {
     try {
-      const result = evaluate(display || '0');
-      setDisplay(result.toString());
+      let finalExpression = display;
+    
+      finalExpression = finalExpression.replace(/(\d+)-(\d+)%/g, (match, num1, num2) => {
+        
+        return `${num1}-${num1}*${num2}/100`;
+      });
+  
+     
+      const result = evaluate(finalExpression);
+      const roundedResult = Math.round(result * 100000) / 100000;
+      setDisplay(roundedResult.toString());
     } catch (error) {
       setDisplay('Error');
     }
@@ -74,9 +84,9 @@ const Calculator = () => {
     <div className="calculator">
       <div className="display">{display || '0'}</div>
       <div className="buttons">
-        {calculatorButtons.map((button) => (
+        {calculatorButtons.map((button, index) => (
           <button
-            key={button.className}
+            key={index}
             className={`button ${button.className}`}
             onClick={() => handleButtonClick(button)}
           >
